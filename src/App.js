@@ -7,6 +7,7 @@ function App() {
   useEffect(()=>{
     console.log(videoRef.current)
   },[])
+
   const onDragStart = (ev,id) => {
       console.log('dragstart:',id);
       videoRef.current.pause()
@@ -26,6 +27,11 @@ function App() {
     e.preventDefault()
   }
 
+  const onTouchStart = (e) =>{
+    console.log("touch")
+    videoRef.current.pause()
+  }
+
   return (
     <div className="container">
       <div className="top-left" onDrop={onDrop} onDragOver = {onDragOver}>
@@ -40,6 +46,7 @@ function App() {
           height="300" 
           key="dragable-video"
           ref={videoRef}
+          onTouchStart={onTouchStart}
           onDragStart = {(e) => onDragStart(e,"video")}
           controls  
           draggable>
